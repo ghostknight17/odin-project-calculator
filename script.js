@@ -4,6 +4,8 @@ let secondNumber = '';
 
 const screen = document.querySelector('.screen');
 const equalsButton = document.querySelector('#equals-button');
+const clearButton = document.querySelector('#clear-button');
+const deleteButton = document.querySelector('#delete-button');
 const numberButtons = document.querySelectorAll(
   '.buttons-container > .number-button'
 );
@@ -19,6 +21,10 @@ numberButtons.forEach((button) => {
 });
 operatorButtons.forEach((button) => {
   button.addEventListener('click', (event) => {
+    if (operator !== '') {
+      operate(operator, firstNumber, secondNumber);
+      secondNumber = '';
+    }
     firstNumber = screen.textContent;
     operator = event.target.innerText;
     screen.textContent += operator;
@@ -26,6 +32,19 @@ operatorButtons.forEach((button) => {
 });
 equalsButton.addEventListener('click', () => {
   operate(operator, firstNumber, secondNumber);
+  secondNumber = '';
+});
+clearButton.addEventListener('click', () => {
+  screen.textContent = '';
+  firstNumber = '';
+  secondNumber = '';
+  operator = '';
+});
+deleteButton.addEventListener('click', () => {
+  screen.textContent = screen.textContent.replace(/.$/, '');
+  if (firstNumber !== '' && operator !== '') {
+    secondNumber = secondNumber.replace(/.$/, '');
+  }
 });
 
 function add(a, b) {
