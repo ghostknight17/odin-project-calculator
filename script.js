@@ -6,6 +6,7 @@ const screen = document.querySelector('.screen');
 const equalsButton = document.querySelector('#equals-button');
 const clearButton = document.querySelector('#clear-button');
 const deleteButton = document.querySelector('#delete-button');
+const decimalButton = document.querySelector('#decimal-button');
 const numberButtons = document.querySelectorAll(
   '.buttons-container > .number-button'
 );
@@ -31,19 +32,25 @@ operatorButtons.forEach((button) => {
   });
 });
 equalsButton.addEventListener('click', () => {
-  operate(operator, firstNumber, secondNumber);
-  secondNumber = '';
+  if (secondNumber !== '') {
+    operate(operator, firstNumber, secondNumber);
+    firstNumber = screen.textContent;
+    secondNumber = '';
+    operator = '';
+  }
 });
 clearButton.addEventListener('click', () => {
-  screen.textContent = '';
-  firstNumber = '';
-  secondNumber = '';
-  operator = '';
+  cleanScreen();
 });
 deleteButton.addEventListener('click', () => {
   screen.textContent = screen.textContent.replace(/.$/, '');
   if (firstNumber !== '' && operator !== '') {
     secondNumber = secondNumber.replace(/.$/, '');
+  }
+});
+decimalButton.addEventListener('click', () => {
+  if (!screen.textContent.includes('.')) {
+    screen.textContent += '.';
   }
 });
 
@@ -69,21 +76,36 @@ function operate(operator, firstNumber, secondNumber) {
   let result;
   if (operator === '+') {
     result = add(Number(firstNumber), Number(secondNumber));
-    screen.textContent = result;
+    screen.textContent =
+      Math.round((result + Number.EPSILON) * 100000) / 100000;
   } else if (operator === '-') {
     result = subtract(Number(firstNumber), Number(secondNumber));
-    screen.textContent = result;
+    screen.textContent =
+      Math.round((result + Number.EPSILON) * 100000) / 100000;
   } else if (operator === '*') {
     result = multiply(Number(firstNumber), Number(secondNumber));
-    screen.textContent = result;
-  } else if (operator === '/') {
+    screen.textContent =
+      Math.round((result + Number.EPSILON) * 100000) / 100000;
+  } else if (operator === '/' && secondNumber !== '0') {
     result = divide(Number(firstNumber), Number(secondNumber));
-    screen.textContent = result;
+    screen.textContent =
+      Math.round((result + Number.EPSILON) * 100000) / 100000;
+  } else if (operator === '/' && secondNumber === '0') {
+    result = divide(Number(firstNumber), Number(secondNumber));
+    screen.textContent = 'Error';
   } else if (operator === '**') {
     result = exponentiate(Number(firstNumber), Number(secondNumber));
-    screen.textContent = result;
+    screen.textContent =
+      Math.round((result + Number.EPSILON) * 100000) / 100000;
   } else {
     result = getRemainder(Number(firstNumber), Number(secondNumber));
-    screen.textContent = result;
+    screen.textContent =
+      Math.round((result + Number.EPSILON) * 100000) / 100000;
   }
+}
+function cleanScreen() {
+  screen.textContent = '';
+  firstNumber = '';
+  secondNumber = '';
+  operator = '';
 }
