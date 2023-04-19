@@ -7,44 +7,55 @@ body {
   height: 100%;
 }
 .header {
-  height: 12%;
-  border-bottom: solid #f1f1f1 1px;
-  background-color: #0f0f0f;
+  color: #f1f1f1;
+  height: 3%;
+  border-bottom: solid #787878 1px;
+  background-color: #1b1b1b;
+  display: flex;
+  align-items: center;
+  padding: 32px;
+}
+.header > h1 {
+  margin-left: 32px;
+}
+#menu-logo {
+  margin-top: 6px;
+  max-width: 25px;
 }
 .calc-container {
   height: 76%;
   display: flex;
   justify-content: center;
-  background-color: #0f0f0f;
+  background-color: #1b1b1b;
 }
 .calc {
-  border: solid #f1f1f1 1px;
+  border: solid #787878 1px;
+  border-radius: 12px;
   height: 100%;
-  width: 50%;
+  min-width: fit-content;
   display: flex;
   flex-direction: column;
   background-color: #0f0f0f;
 }
 .screen-container {
-  border: solid #f1f1f1 1px;
-  height: 128px;
+  height: 160px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .screen {
-  font-size: 36px;
+  border: solid #787878 1px;
+  font-size: 48px;
   background-color: #6e907f;
   width: 92%;
   height: 70%;
-  border-radius: 4px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: end;
   padding-right: 24px;
 }
 .buttons-container {
-  border: solid #f1f1f1 1px;
   flex: 1;
   display: flex;
   flex-wrap: wrap;
@@ -54,14 +65,15 @@ body {
   background-color: #0f0f0f;
   color: #f1f1f1;
   font-size: 24px;
+  border-radius: 12px;
 }
 .footer {
   height: 12%;
-  border-top: solid #f1f1f1 1px;
+  border-top: solid #787878 1px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #f1f1f1;
-  background-color: #0f0f0f;
+  background-color: #1b1b1b;
 }
